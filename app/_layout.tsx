@@ -16,6 +16,8 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
+  // TODO: Add DB connection 
+
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
