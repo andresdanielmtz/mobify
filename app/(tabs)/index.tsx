@@ -1,29 +1,56 @@
-import { StyleSheet } from "react-native";
-import { ThemedView } from "@/components/ThemedView";
+import React, { useEffect, useState } from "react";
+import { Platform, StyleSheet, View, SafeAreaView } from "react-native";
+import { supabase } from "../../utils/supabase";
+import Header from "@/components/Header";
 import { ThemedText } from "@/components/ThemedText";
+import SongList from "../../components/SongList";
+import { ThemedView } from "@/components/ThemedView";
+
 
 export default function HomeScreen() {
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (Platform.OS === "web") {
+        const { data, error } = await supabase.from("songs").select("*");
+        if (error) {
+          console.error("Error fetching data:", error.message);
+          return;
+        }
+        setData(data);
+        console.log("Data fetched:", data);
+      } else {
+        console.log("Fetching data is only supported on web.");
+      }
+    }
+    fetchData();
+  }, []);
+
   return (
-    <ThemedView style={styles.mainContainer}>
-      <ThemedText
-        style={{
-          fontSize: 20,
-          fontWeight: "bold",
-          textAlign: "center",
-          marginTop: 20,
-        }}
-      >Welcome to Mobify
-      </ThemedText>
-    </ThemedView>
+    <SafeAreaView style={styles.safeArea}>
+      <ThemedView style={styles.container}>
+        <Header />
+        <ThemedView style={styles.content}>
+          {data.length > 0 ? (
+            <SongList data={data} />
+          ) : (
+            <ThemedText>Loading...</ThemedText>
+          )}
+        </ThemedView>
+      </ThemedView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
+  safeArea: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "100%",
+  },
+  container: {
+    flex: 1,
+  },
+  content: {
+    flex: 1,
   },
 });
