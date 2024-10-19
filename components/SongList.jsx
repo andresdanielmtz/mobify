@@ -8,12 +8,10 @@ import {
   View,
 } from "react-native";
 import { Audio } from "expo-av";
-import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
-import { Play, Pause } from "lucide-react-native";
 import MusicBar from "./MusicBar";
 
-const SongItem = ({ song, itemWidth, onPress, isPlaying }) => (
+const SongItem = ({ song, itemWidth, onPress }) => (
   <TouchableOpacity
     onPress={() => onPress(song)}
     style={[styles.songItem, { width: itemWidth }]}
@@ -25,13 +23,6 @@ const SongItem = ({ song, itemWidth, onPress, isPlaying }) => (
         { width: itemWidth - 20, height: itemWidth - 20 },
       ]}
     />
-    <ThemedView style={styles.playIconContainer}>
-      {isPlaying ? (
-        <Pause color="white" size={24} />
-      ) : (
-        <Play color="white" size={24} />
-      )}
-    </ThemedView>
     <ThemedText numberOfLines={1} style={styles.songName}>
       {song.song_name}
     </ThemedText>
