@@ -5,26 +5,36 @@ import Header from "@/components/Header";
 import { ThemedText } from "@/components/ThemedText";
 import SongList from "../../components/SongList";
 import { ThemedView } from "@/components/ThemedView";
+import readDB from "@/hooks/readDB";
 
 
+type Song = { 
+  id: number, 
+  song_name: string,
+  url: string,
+  created_at: string,
+  cover_url: string,
+  creator: string
+}
 export default function HomeScreen() {
-  const [data, setData] = useState<any[]>([]);
+  const [songs, setSongs] = useState<Song[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      if (Platform.OS === "web" || Platform.OS === "ios") {
-        const { data, error } = await supabase.from("songs").select("*");
-        if (error) {
-          console.error("Error fetching data:", error.message);
-          return;
-        }
-        setData(data);
-        console.log("Data fetched:", data);
-      } else {
-        console.log("Fetching data is only supported on web.");
+    const fetchSongs = async () => {
+      try {
+        const data = await readDB();
+        setSongs(data);
+      } catch (err) {
+        setError("Failed to load songs");
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
-    }
-    fetchData();
+    };
+
+    fetchSongs();
   }, []);
 
   return (
@@ -32,11 +42,16 @@ export default function HomeScreen() {
       <ThemedView style={styles.container}>
         <Header />
         <ThemedView style={styles.content}>
-          {data.length > 0 ? (
-            <SongList data={data} />
-          ) : (
+        {loading ? (
             <ThemedText>Loading...</ThemedText>
+          ) : error ? (
+            <ThemedText>{error}</ThemedText>
+          ) : songs.length > 0 ? (
+            <SongList data={songs} />
+          ) : (
+            <ThemedText>No songs found</ThemedText>
           )}
+
         </ThemedView>
       </ThemedView>
     </SafeAreaView>
