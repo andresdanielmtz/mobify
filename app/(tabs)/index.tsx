@@ -12,7 +12,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     async function fetchData() {
-      if (Platform.OS === "web") {
+      if (Platform.OS === "web" || Platform.OS === "ios") {
         const { data, error } = await supabase.from("songs").select("*");
         if (error) {
           console.error("Error fetching data:", error.message);

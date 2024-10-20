@@ -8,4 +8,14 @@ Prof. Arturo Javier Lopez
 
 Andrés Martínez - A00227463
 
-**Completely functional on `web`, need to test on `android` or `ios`**
+**Completely functional on `web` and `ios`, need to test on `android`**
+
+To test either of those, use the following command 
+
+```npm run ios```
+
+
+or
+
+
+```npm run web```
