@@ -1,5 +1,5 @@
 # Mobify 
-## Spotify-fork. From Mob Records to the world
+## Not-A-Spotify-fork. From Mob Records to the world
 ### Integración de Seguridad Informática en Redes y Sistemas de Software
 
 **Tarea: Multimedia (Imágenes y Sonido)**

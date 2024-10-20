@@ -3,7 +3,7 @@ import { View, TouchableOpacity, StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react-native";
-
+import { Colors } from "@/constants/Colors";
 const MusicBar = ({
   currentSong,
   isPlaying,
@@ -25,17 +25,17 @@ const MusicBar = ({
       </View>
       <View style={styles.controls}>
         <TouchableOpacity onPress={onPrevious}>
-          <SkipBack color="#f7287b" size={24} />
+          <SkipBack color={Colors.mainColor} size={24} />
         </TouchableOpacity>
         <TouchableOpacity onPress={onPlayPause} style={styles.playPauseButton}>
           {isPlaying ? (
-            <Pause color="#f7287b" size={24} />
+            <Pause color={Colors.mainColor} size={24} />
           ) : (
-            <Play color="#f7287b" size={24} />
+            <Play color={Colors.mainColor} size={24} />
           )}
         </TouchableOpacity>
         <TouchableOpacity onPress={onNext}>
-          <SkipForward color="#f7287b" size={24} />
+          <SkipForward color={Colors.mainColor} size={24} />
         </TouchableOpacity>
       </View>
     </ThemedView>
@@ -73,4 +73,3 @@ const styles = StyleSheet.create({
 });
 
 export default MusicBar;
-
