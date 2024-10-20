@@ -7,3 +7,5 @@
 Prof. Arturo Javier Lopez
 
 Andrés Martínez - A00227463
+
+**Completely functional on `web`, need to test on `android` or `ios`**
