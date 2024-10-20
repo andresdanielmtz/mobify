@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Platform, StyleSheet, View, SafeAreaView } from "react-native";
-import { supabase } from "../../utils/supabase";
+import { StyleSheet, SafeAreaView } from "react-native";
 import Header from "@/components/Header";
 import { ThemedText } from "@/components/ThemedText";
 import SongList from "../../components/SongList";

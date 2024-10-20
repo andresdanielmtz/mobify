@@ -4,6 +4,8 @@
 
 **Tarea: Multimedia (Imágenes y Sonido)**
 
+![Project Screenshot](./assets/readme/screenshot.png)
+
 Prof. Arturo Javier Lopez
 
 Andrés Martínez - A00227463
